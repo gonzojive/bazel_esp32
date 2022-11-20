@@ -2,3 +2,4 @@ bazel-bin
 bazel-helloworld
 bazel-out
 bazel-testlogs
+bazel-bazel_esp32
