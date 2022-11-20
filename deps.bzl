@@ -14,7 +14,7 @@ def bazel_esp32_dependencies():
     http_archive(
         name = "arduino_esp32",
         build_file = "@bazel_esp32//:BUILD.esp32",
-        strip_prefix = "esp32-1.0.6",
-        sha256 = "982da9aaa181b6cb9c692dd4c9622b022ecc0d1e3aa0c5b70428ccc3c1b4556b",
-        urls = ["https://github.com/espressif/arduino-esp32/releases/download/1.0.6/esp32-1.0.6.zip"],
+        strip_prefix = "esp32-2.0.5",
+        sha256 = "c7a1040c5f007a799ef9eb249508e3544c3cf5246f67cdfdc1e80f7d0ca7b41d",
+        urls = ["https://github.com/espressif/arduino-esp32/releases/download/2.0.5/esp32-2.0.5.zip"],
     )

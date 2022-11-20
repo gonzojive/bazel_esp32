@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo blah
+exit 3
 # Ugh. Switch compiler based on the presence of the -std=gnu99 flag.
 if [[ "$*" == *gnu99* ]]
 then

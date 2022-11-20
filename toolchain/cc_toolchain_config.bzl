@@ -16,6 +16,8 @@ BUILD_F_CPU = "240000000L"
 RUNTIME_IDE_VERSION = "10607"
 BUILD_BOARD = "ESP32_DEV"
 BUILD_ARCH = "ESP32"
+
+# aka build.mcu, argument to esp --chip flag.
 BUILD_VARIANT = "esp32"
 
 BUILD_EXTRA_FLAGS = [
@@ -29,7 +31,7 @@ BUILD_EXTRA_FLAGS = [
 ]
 
 RUNTIME_PLATFORM_PATH = "external/arduino_esp32"
-COMPILER_SDK_PATH = RUNTIME_PLATFORM_PATH + "/tools/sdk"
+COMPILER_SDK_PATH = RUNTIME_PLATFORM_PATH + "/tools/sdk/" + BUILD_VARIANT
 
 INCLUDE_DIRS = [
     "include/config",
@@ -332,6 +334,7 @@ def _impl(ctx):
                     ACTION_NAMES.assemble,
                     ACTION_NAMES.preprocess_assemble,
                     ACTION_NAMES.linkstamp_compile,
+                    ACTION_NAMES.c_compile,
                     ACTION_NAMES.cpp_compile,
                     ACTION_NAMES.cpp_header_parsing,
                     ACTION_NAMES.cpp_module_compile,
@@ -417,6 +420,7 @@ def _impl(ctx):
         target_cpu = "xtensa",
         target_libc = "unknown",
         compiler = "cpp",
+        #compiler = "gcc",
         abi_version = "unknown",
         abi_libc_version = "unknown",
         tool_paths = tool_paths,
