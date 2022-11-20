@@ -9,8 +9,8 @@ load("@bazel_tools//tools/build_defs/cc:action_names.bzl", "ACTION_NAMES")
 
 # This file has been written based off the variable definitions in the following
 # files:
-#  - https://github.com/espressif/arduino-esp32/blob/1.0.6/platform.txt
-#  - https://github.com/espressif/arduino-esp32/blob/1.0.6/boards.txt
+#  - https://github.com/espressif/arduino-esp32/blob/2.0.3/platform.txt
+#  - https://github.com/espressif/arduino-esp32/blob/2.0.3/boards.txt
 
 BUILD_F_CPU = "240000000L"
 RUNTIME_IDE_VERSION = "10607"
@@ -250,56 +250,62 @@ COMPILER_CPREPROCESSOR_FLAGS = [
 
 COMPILER_WARNING_FLAGS = ["-Wall"]
 
-COMPILER_C_FLAGS = [
-    "-std=gnu99",
-    "-Os",
-    "-g3",
-    "-fstack-protector",
-    "-ffunction-sections",
-    "-fdata-sections",
-    "-fstrict-volatile-bitfields",
-    "-mlongcalls",
-    "-nostdlib",
-    "-Wpointer-arith",
-] + COMPILER_WARNING_FLAGS + [
-    "-Wno-maybe-uninitialized",
-    "-Wno-unused-function",
-    "-Wno-unused-but-set-variable",
-    "-Wno-unused-variable",
-    "-Wno-deprecated-declarations",
-    "-Wno-unused-parameter",
-    "-Wno-sign-compare",
-    "-Wno-old-style-declaration",
-    "-MMD",
+COMPILER_CPP_FLAGS_NEW = [
     "-c",
+    "-fdata-sections",
+    "-fexceptions",
+    "-ffunction-sections",
+    "-fno-jump-tables",
+    "-fno-rtti",
+    "-fno-tree-switch-conversion",
+    "-freorder-blocks",
+    "-fstack-protector",
+    "-fstrict-volatile-bitfields",
+    "-ggdb",
+    "-mlongcalls",
+    "-MMD",
+    "-Os",
+    "-std=gnu++11",
 ]
 
 COMPILER_CPP_FLAGS = [
-    "-std=gnu++11",
-    "-Os",
-    "-g3",
-    "-Wpointer-arith",
-    "-fexceptions",
-    "-fstack-protector",
-    "-ffunction-sections",
-    "-fdata-sections",
-    "-fstrict-volatile-bitfields",
-    "-mlongcalls",
-    "-nostdlib",
-] + COMPILER_WARNING_FLAGS + [
-    "-Wno-error=maybe-uninitialized",
-    "-Wno-error=unused-function",
-    "-Wno-error=unused-but-set-variable",
-    "-Wno-error=unused-variable",
-    "-Wno-error=deprecated-declarations",
-    "-Wno-unused-parameter",
-    "-Wno-unused-but-set-parameter",
-    "-Wno-missing-field-initializers",
-    "-Wno-sign-compare",
-    "-fno-rtti",
-    "-MMD",
     "-c",
+    "-fdata-sections",
+    "-fexceptions",
+    "-ffunction-sections",
+    "-fno-jump-tables",
+    "-fno-rtti",
+    "-fno-tree-switch-conversion",
+    "-freorder-blocks",
+    "-fstack-protector",
+    "-fstrict-volatile-bitfields",
+    "-ggdb",
+    "-mlongcalls",
+    "-MMD",
+    "-Os",
+    "-std=gnu++11",
+] + COMPILER_WARNING_FLAGS + [
+    # "-Wno-error=maybe-uninitialized",
+    # "-Wno-error=unused-function",
+    # "-Wno-error=unused-but-set-variable",
+    # "-Wno-error=unused-variable",
+    # "-Wno-error=deprecated-declarations",
+    # "-Wno-unused-parameter",
+    # "-Wno-unused-but-set-parameter",
+    # "-Wno-missing-field-initializers",
+    # "-Wno-sign-compare",
+    # "-Wpointer-arith",
+    "-Wno-error=deprecated-declarations",
+    "-Wno-error=unused-but-set-variable",
+    "-Wno-error=unused-function",
+    "-Wno-error=unused-variable",
+    "-Wno-frame-address",
+    "-Wno-sign-compare",
+    "-Wno-unused-parameter",
+    "-Wwrite-strings",
 ]
+
+COMPILER_C_FLAGS = COMPILER_CPP_FLAGS
 
 COMPILER_C_ELF_FLAGS = [
     "-nostdlib",

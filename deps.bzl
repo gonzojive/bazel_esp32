@@ -5,9 +5,12 @@ def bazel_esp32_dependencies():
     http_archive(
         name = "xtensa_esp32_elf_linux64",
         build_file = "@bazel_esp32//:BUILD.esp32toolchain",
-        sha256 = "96f5f6e7611a0ed1dc47048c54c3113fc5cebffbf0ba90d8bfcd497afc7ef9f3",
+        sha256 = "698d8407e18275d18feb7d1afdb68800b97904fbe39080422fb8609afa49df30",
         strip_prefix = "xtensa-esp32-elf",
-        urls = ["https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-97-gc752ad5-5.2.0.tar.gz"],
+        #urls = ["https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-97-gc752ad5-5.2.0.tar.gz"],
+        urls = [
+            "https://github.com/espressif/crosstool-NG/releases/download/esp-2022r1/xtensa-esp32-elf-gcc11_2_0-esp-2022r1-linux-amd64.tar.xz",
+        ],
     )
 
     # The Arduino base libraries.
