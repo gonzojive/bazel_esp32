@@ -28,7 +28,7 @@ BUILD_EXTRA_FLAGS = [
     "-DESP32=1",
 ]
 
-RUNTIME_PLATFORM_PATH = "external/arduino_esp32"
+RUNTIME_PLATFORM_PATH = "external/+esp32_dependencies_extension+arduino_esp32"
 COMPILER_SDK_PATH = RUNTIME_PLATFORM_PATH + "/tools/sdk"
 
 INCLUDE_DIRS = [
@@ -400,13 +400,15 @@ def _impl(ctx):
         default_link_flags_feature,
     ]
 
+    xtensa_esp32_elf_dir = "external/+esp32_dependencies_extension+xtensa_esp32_elf_linux64"
+
     return cc_common.create_cc_toolchain_config_info(
         ctx = ctx,
         cxx_builtin_include_directories = [
-            "external/xtensa_esp32_elf_linux64/xtensa-esp32-elf/sys-include",
-            "external/xtensa_esp32_elf_linux64/xtensa-esp32-elf/include/c++/5.2.0",
-            "external/xtensa_esp32_elf_linux64/lib/gcc/xtensa-esp32-elf/5.2.0/include-fixed",
-            "external/xtensa_esp32_elf_linux64/lib/gcc/xtensa-esp32-elf/5.2.0/include",
+            xtensa_esp32_elf_dir + "/xtensa-esp32-elf/sys-include",
+            xtensa_esp32_elf_dir + "/xtensa-esp32-elf/include/c++/5.2.0",
+            xtensa_esp32_elf_dir + "/lib/gcc/xtensa-esp32-elf/5.2.0/include-fixed",
+            xtensa_esp32_elf_dir + "/lib/gcc/xtensa-esp32-elf/5.2.0/include",
             RUNTIME_PLATFORM_PATH + "/cores/esp32",
             RUNTIME_PLATFORM_PATH + "/variants/esp32",
         ] + [COMPILER_SDK_PATH + "/" + p for p in INCLUDE_DIRS],

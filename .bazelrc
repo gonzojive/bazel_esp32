@@ -1,6 +1,6 @@
 # Use our custom-configured c++ toolchain.
 
-build:esp32 --crosstool_top=//toolchain:esp32
+#build:esp32 --crosstool_top=//toolchain:esp32
 
 # Use --cpu as a differentiator.
 
@@ -9,10 +9,12 @@ build:esp32 --cpu=xtensa
 # Use the default Bazel C++ toolchain to build the tools used during the
 # build.
 
-build:esp32 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+#build:esp32 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
 # TODO(https://github.com/simonhorlick/bazel_esp32/issues/4):
 # The way toolchain resolution works in this repo should be migrated per
 # https://github.com/bazelbuild/bazel/issues/7260
-build:esp32 --incompatible_enable_cc_toolchain_resolution=false
-build --incompatible_enable_cc_toolchain_resolution=false
+#build:esp32 --incompatible_enable_cc_toolchain_resolution=false
+#build --incompatible_enable_cc_toolchain_resolution=false
+
+common --enable_bzlmod
