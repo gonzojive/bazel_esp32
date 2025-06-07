@@ -30,10 +30,9 @@ genrule(
     name = "gen_partitions",
     srcs = [],
     outs = ["hello.partitions.bin"],
-    cmd = "python $(location @arduino_esp32//:gen_esp32part.py) $(location @arduino_esp32//:tools/partitions/min_spiffs.csv) \"$@\"",
+    cmd = "$(location @arduino_esp32//:gen_esp32part) $(location @arduino_esp32//:tools/partitions/min_spiffs.csv) \"$@\"",
     tools = [
-        "@arduino_esp32//:gen_esp32part"
-        "@arduino_esp32//:gen_esp32part.py",
+        "@arduino_esp32//:gen_esp32part",
         "@arduino_esp32//:tools/partitions/min_spiffs.csv",
     ],
 )
