@@ -8,9 +8,11 @@ bazel_dep(name = "bazel_skylib", version = "1.5.0")
 bazel_dep(name = "rules_cc", version = "0.0.9")  # Provides cc_common, cc_toolchain_config_info
 bazel_dep(name = "platforms", version = "0.0.10")  # For platform constraints if needed
 
+bazel_dep(name = "rules_python", version = "1.4.1")
+
 # Extension for arduino_esp32 and potentially xtensa toolchain binaries
 esp32_deps_ext = use_extension("//:esp32_deps_extension.bzl", "esp32_dependencies_extension")
-use_repo(esp32_deps_ext, "arduino_esp32", "xtensa_esp32_elf_linux64")  # Names defined in the extension
+use_repo(esp32_deps_ext, "arduino_esp32", "xtensa_esp32_elf_linux64", "esptool")  # Names defined in the extension
 
 # Register the custom toolchain defined within this module
 register_toolchains("//toolchain:esp32_toolchain_xtensa")

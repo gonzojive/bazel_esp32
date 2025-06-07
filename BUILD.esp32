@@ -1,3 +1,5 @@
+load("@rules_python//python:py_library.bzl", "py_library")
+
 exports_files(["cores/esp32/main.cpp"])
 
 exports_files(
@@ -243,4 +245,13 @@ cc_library(
         "@arduino_esp32//:core_c_lib",
         "@arduino_esp32//:core_lib",
     ],
+)
+
+py_binary(
+    name = "gen_esp32part",
+    srcs = ["gen_esp32part.py"],
+    # If the script has other Python dependencies within the @arduino_esp32
+    # repo, you might need a 'deps' attribute pointing to a py_library.
+    # For many simple scripts, this is not necessary.
+    visibility = ["//visibility:public"],
 )

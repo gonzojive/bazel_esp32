@@ -21,6 +21,25 @@ def _esp32_dependencies_extension_impl(module_ctx):
         urls = ["https://github.com/espressif/arduino-esp32/releases/download/1.0.6/esp32-1.0.6.zip"],
     )
 
+    http_archive(
+        name = "esptool",
+        sha256 = "84c18a8b46224f53ddf69775945600558eaceb35f61892bfeea65a248e6bd874",
+        url = "https://github.com/espressif/esptool/releases/download/v4.8.1/esptool-v4.8.1-linux-amd64.zip",
+        build_file_content = """
+
+genrule(
+    name = "esptool",
+    srcs = ["esptool-linux-amd64/esptool"],  # The input is the pre-compiled binary
+    outs = ["esptool_exe"], # The name of the output file
+    # The command copies the input file to the output file
+    cmd = "cp $< $@",
+    # This key attribute makes the output file executable
+    executable = True,
+    visibility = ["//visibility:public"],
+)
+"""
+    )
+
 esp32_dependencies_extension = module_extension(
     implementation = _esp32_dependencies_extension_impl,
 )
