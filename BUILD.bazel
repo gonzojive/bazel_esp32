@@ -1,3 +1,7 @@
+# Updated to load the new partitions macro
+load("//rules:defs.bzl", "esp32_binary", "esp32_image", "esp32_partitions")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
 cc_binary(
     name = "hello",
     srcs = ["@arduino_esp32//:cores/esp32/main.cpp"],  # main must depend on the library containing setup and loop.
@@ -9,6 +13,11 @@ cc_binary(
     ],
 )
 
+esp32_binary(
+    name = "hello_esp32_xtensa",
+    dep = ":hello",
+)
+
 cc_library(
     name = "hello_lib",
     srcs = ["hello.cc"],
@@ -18,21 +27,13 @@ cc_library(
     ],
 )
 
-genrule(
-    name = "gen_image",
-    srcs = [":hello"],
-    outs = ["hello.bin"],
-    cmd = "$(location @esptool//:esptool) --chip esp32 elf2image --flash_mode dio --flash_freq 80m --flash_size 4MB -o \"$@\" \"$<\"",
-    tools = ["@esptool//:esptool"],
+esp32_image(
+    name = "image",
+    src = ":hello_esp32_xtensa",
 )
 
-genrule(
-    name = "gen_partitions",
-    srcs = [],
-    outs = ["hello.partitions.bin"],
-    cmd = "$(location @arduino_esp32//:gen_esp32part) $(location @arduino_esp32//:tools/partitions/min_spiffs.csv) \"$@\"",
-    tools = [
-        "@arduino_esp32//:gen_esp32part",
-        "@arduino_esp32//:tools/partitions/min_spiffs.csv",
-    ],
+esp32_partitions(
+    name = "partitions",
+    csv = "@arduino_esp32//:tools/partitions/min_spiffs.csv",
 )
+
